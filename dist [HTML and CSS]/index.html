@@ -1,0 +1,164 @@
+<!--TO DO: Change assets/js link AND delete additional cards after testing-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="Description" content="Team profile generator" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <title>Team profile generator</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <!--Overrode Bootstrap styles for "bg" (background color) and "text"-->
+    <header class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-12">
+            <h1>Team Profiles!</h1>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="row">
+        <!--Changed "class" to "employees"-->
+        <div class="col-12 employees">
+          <section class="row justify-content-around">
+            <div class="col-12 my-4">
+              <div class="card">
+                <h3 class="card-header">
+                  <!--Changed "class" to "employee-name"-->
+                  <span class="employee-name">TEST NAME</span>
+                  <!--Changed "id" to "employee-role-icon"-->
+                  <p>
+                    <!--Changed "id" to "employee-role-icon"-->
+                    <!--Biz placeholder; addt'l icons here: https://icons8.com/icons/set/small-->
+                    <img
+                      id="employee-role-icon"
+                      src="https://img.icons8.com/material-rounded/24/000000/small-business.png"
+                    />
+                    <!--Changed "id" to "class": "employee-role"-->
+                    <span class="employee-role">TEST ROLE</span>
+                  </p>
+                </h3>
+                <div class="card-body row">
+                  <ul class="card-text" style="list-style-type: none">
+                    <li>
+                      ID:
+                      <!--Changed "id" to "class": "employee-number"-->
+                      <span class="employee-number"></span>
+                    </li>
+                    <li>
+                      Email:
+                      <!--Changed "id" to "class": "employee-email"-->
+                      <span class="employee-email"></span>
+                    </li>
+                    <!--Following list items are only populated if entered:-->
+                    <!--MANAGER CLASS-->
+                    <li>
+                      <span class="manager-office-number"></span>
+                    </li>
+                    <!--ENGINEER CLASS-->
+                    <li>
+                      <span class="engineer-github-link"></span>
+                    </li>
+                    <!--INTERN CLASS-->
+                    <li><span class="intern-school"></span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!--Commented out below cards for test-->
+            <!-- <div class="col-12 col-sm-6 col-lg-4 mb-3">
+              <div class="card">
+                <div class="card-text">
+                  <ul style="list-style-type: none">
+                    <li><span id="forecast-date-0"></span></li>
+                    <li><img id="forecast-icon-0" /></li>
+                    <li>
+                      Temperature: <span id="forecast-temp-0"></span> Farenheit
+                    </li>
+                    <li>Humidity: <span id="forecast-humidity-0"></span>%</li>
+                    <li>Wind speed: <span id="forecast-wind-0"></span> mph</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 mb-3">
+              <div class="card">
+                <div class="card-text">
+                  <ul style="list-style-type: none">
+                    <li><span id="forecast-date-1"></span></li>
+                    <li><img id="forecast-icon-1" /></li>
+                    <li>
+                      Temperature: <span id="forecast-temp-1"></span> Farenheit
+                    </li>
+                    <li>Humidity: <span id="forecast-humidity-1"></span>%</li>
+                    <li>Wind speed: <span id="forecast-wind-1"></span> mph</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 mb-3">
+              <div class="card">
+                <div class="card-text">
+                  <ul style="list-style-type: none">
+                    <li><span id="forecast-date-2"></span></li>
+                    <li><img id="forecast-icon-2" /></li>
+                    <li>
+                      Temperature: <span id="forecast-temp-2"></span> Farenheit
+                    </li>
+                    <li>Humidity: <span id="forecast-humidity-2"></span>%</li>
+                    <li>Wind speed: <span id="forecast-wind-2"></span> mph</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 mb-3">
+              <div class="card">
+                <div class="card-text">
+                  <ul style="list-style-type: none">
+                    <li><span id="forecast-date-3"></span></li>
+                    <li><img id="forecast-icon-3" /></li>
+                    <li>
+                      Temperature: <span id="forecast-temp-3"></span> Farenheit
+                    </li>
+                    <li>Humidity: <span id="forecast-humidity-3"></span>%</li>
+                    <li>Wind speed: <span id="forecast-wind-3"></span> mph</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 mb-3">
+              <div class="card">
+                <div class="card-text">
+                  <ul style="list-style-type: none">
+                    <li><span id="forecast-date-4"></span></li>
+                    <li><img id="forecast-icon-4" /></li>
+                    <li>
+                      Temperature: <span id="forecast-temp-4"></span> Farenheit
+                    </li>
+                    <li>Humidity: <span id="forecast-humidity-4"></span>%</li>
+                    <li>Wind speed: <span id="forecast-wind-4"></span> mph</li>
+                  </ul>
+                </div>
+              </div>
+            </div> -->
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--Change "script" link below-->
+    <script type="text/javascript" src="./assets/js/script.js"></script>
+  </body>
+</html>

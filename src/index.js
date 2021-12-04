@@ -73,3 +73,22 @@ inquirer.prompt(questions).then((response) => {
       : console.log("Responses saved to new README file!");
   });
 });
+
+const team = [Manager("something"), Engineer("something"), Intern("something")];
+
+function renderManagerCard(manager) {
+  return `a big blob of html`;
+}
+
+function renderEngineerCard() {}
+
+team
+  .map((member) => {
+    if (member.type === "Manager") {
+      return renderManagerCard(member);
+    }
+    if (member.type === "Engineer") {
+      return renderEngineerCard(member);
+    }
+  })
+  .join("");

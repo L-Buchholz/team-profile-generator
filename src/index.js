@@ -37,8 +37,12 @@ const listOptions = [
   {
     type: "list",
     message: "Thank you! Please select one of the following options:",
-    name: "license",
-    choices: ["* Add an engineer", "* Add an intern", "* Finish and exit"],
+    name: "options",
+    choices: [
+      { value: "engineer", name: "* Add an engineer" },
+      { value: "intern", name: "* Add an intern" },
+      { value: "finish", name: "* Finish and exit" },
+    ],
   },
 ];
 
@@ -99,6 +103,7 @@ function promptForManager() {
       response.office
     );
     team.push(manager);
+    return promptForOptions();
   });
 }
 
@@ -113,6 +118,7 @@ function promptForEngineer() {
       response.gitHub
     );
     team.push(engineer);
+    return promptForOptions();
   });
 }
 
@@ -127,6 +133,20 @@ function promptForIntern() {
       response.school
     );
     team.push(intern);
+    return promptForOptions();
+  });
+}
+
+//Initiates list options (move to another employee or finish and exit) prompt
+function promptForOptions() {
+  return inquirer.prompt(listOptions).then((response) => {
+    if (response.options === "engineer") {
+      return promptForEngineer();
+    } else if (response.options === "intern") {
+      return promptForIntern();
+    } else {
+      return generateHtml();
+    }
   });
 }
 
@@ -147,7 +167,7 @@ function generateHtml() {
   fs.writeFileSync("../dist/index.html", templateHtml);
 }
 
-/* The above is an abbreviated way of saying this: 
+/* The above .map... is an abbreviated way of saying this: 
 {
     if (member instanceof Manager) {
       return member.render();
@@ -162,7 +182,4 @@ function generateHtml() {
 */
 
 //Runs first function results and then moves to subsequent functions
-promptForManager()
-  .then(promptForEngineer)
-  .then(promptForIntern)
-  .then(generateHtml);
+promptForManager();

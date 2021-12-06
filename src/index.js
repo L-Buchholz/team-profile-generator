@@ -3,6 +3,8 @@ const inquirer = require("inquirer");
 
 const fs = require("fs");
 const Manager = require("../lib/Manager.class");
+const Engineer = require("../lib/Engineer.class");
+const Intern = require("../lib/Intern.class");
 
 /*Array of user input questions*/
 const managerQuestions = [
@@ -83,87 +85,57 @@ const internQuestions = [
   },
 ];
 
+/*
+
 function promptForManager() {
   inquirer.prompt(managerQuestions).then((response) => {
     console.log(response);
   });
 }
+*/
 
-//function promptForEngineer =
-
-//function promptForIntern =
-
-//function promptForListOptions =
-
-const manager = new Manager("Ted", 23, "email@email", 2);
+//Insert responses for Manager entries
 
 const htmlString = fs.readFileSync("index.html", "utf8");
+const manager = new Manager("Ted", 23, "email@email", 2);
+const engineer = new Engineer("Lauren", 33, "email@email", "L-Buchholz");
+const intern = new Intern("Felipe", 20, "email@email", "University of Nowhere");
+
+//Iterate for more than one instance of manager, engineer, and/or intern entries
+
+const team = [manager, engineer, intern];
+
+const output = team
+  .map((member) => {
+    return member.render();
+  })
+  .join("");
+
+/* The above is an abbreviated way of saying this: 
+{
+    if (member instanceof Manager) {
+      return member.render();
+    }
+    if (member instanceof Engineer) {
+      return member.render();
+    }
+    if (member instanceof Intern) {
+      return member.render();
+    }
+  }
+*/
 
 const templateHtml = htmlString.replace(
   "<!--THIS IS THE INSERTION POINT-->",
-  //Temp code to try this out
-  `
-  <div class="card">
-    <h3 class="card-header">
-      <span class="employee-name">${manager.name}</span>
-          <p>
-            <img
-              id="employee-role-icon"
-              src="https://img.icons8.com/material-rounded/24/000000/small-business.png"
-              />
-            <span class="employee-role">${manager.getRole()}</span>
-          </p>
-    </h3>
-    <div class="card-body row">
-      <ul class="card-text" style="list-style-type: none">
-          <li>
-            ID:
-            <span class="employee-number">${manager.id}</span>
-          </li>
-          <li>
-            Email:    
-            <span class="employee-email">${manager.email}</span>
-          </li>
-          <li>
-            Office number:
-            <span class="manager-office-number">${manager.officeNumber}</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  `
+  //Replace with the following:
+  output
 );
-
-/* 
-References for engineer and intern class divs:
-<!--ENGINEER CLASS-->
-<li>
-  <span class="engineer-github-link"></span>
-</li>
-<!--INTERN CLASS-->
-<li><span class="intern-school"></span></li>
-*/
 
 //Creates new HTML file in dist (output) folder using generated template
 fs.writeFileSync("../dist/index.html", templateHtml);
 
 /*
-const team = [Manager("something"), Engineer("something"), Intern("something")];
-
-team
-  .map((member) => {
-    if (member instanceof Manager) {
-      return renderManagerCard(member);
-    }
-    if (member instanceof Engineer) {
-      return renderEngineerCard(member);
-    }
-  })
-  .join("");
-  */
-
-/*FROM PREVIOUS HW
+FROM PREVIOUS HW
 inquirer.prompt(questions).then((response) => {
   fs.writeFile("user_README.md", generateMarkdown(response), (err) => {
     err

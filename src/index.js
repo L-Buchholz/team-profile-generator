@@ -61,7 +61,7 @@ const engineerQuestions = [
   {
     type: "input",
     message: "Please enter the engineer's GitHub username:",
-    name: "github-username",
+    name: "gitHub",
   },
 ];
 
@@ -88,7 +88,7 @@ const internQuestions = [
   },
 ];
 
-//Initiates Manager prompt questions/initializes prompts
+//Initiates Manager prompt questions
 function promptForManager() {
   //"Return" saves Promise (responses) after following function is run
   return inquirer.prompt(managerQuestions).then((response) => {
@@ -102,9 +102,33 @@ function promptForManager() {
   });
 }
 
-///GET RID OF THESE
-const engineer = new Engineer("Lauren", 33, "email@email", "L-Buchholz");
-const intern = new Intern("Felipe", 20, "email@email", "University of Nowhere");
+//Initiates Engineer prompt questions
+function promptForEngineer() {
+  //"Return" saves Promise (responses) after following function is run
+  return inquirer.prompt(engineerQuestions).then((response) => {
+    const engineer = new Engineer(
+      response.name,
+      response.id,
+      response.email,
+      response.gitHub
+    );
+    team.push(engineer);
+  });
+}
+
+//Initiates Intern prompt questions
+function promptForIntern() {
+  //"Return" saves Promise (responses) after following function is run
+  return inquirer.prompt(internQuestions).then((response) => {
+    const intern = new Intern(
+      response.name,
+      response.id,
+      response.email,
+      response.school
+    );
+    team.push(intern);
+  });
+}
 
 //Function for generating HTML
 
@@ -137,4 +161,8 @@ function generateHtml() {
   }
 */
 
-promptForManager().then(generateHtml);
+//Runs first function results and then moves to subsequent functions
+promptForManager()
+  .then(promptForEngineer)
+  .then(promptForIntern)
+  .then(generateHtml);

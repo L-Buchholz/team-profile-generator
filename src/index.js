@@ -6,6 +6,9 @@ const Manager = require("../lib/Manager.class");
 const Engineer = require("../lib/Engineer.class");
 const Intern = require("../lib/Intern.class");
 
+//Iterate for more than one instance of manager, engineer, and/or intern entries (below functions)
+const team = [];
+
 /*Array of user input questions*/
 const managerQuestions = [
   {
@@ -85,31 +88,40 @@ const internQuestions = [
   },
 ];
 
-/*
-
+//Initiates Manager prompt questions/initializes prompts
 function promptForManager() {
-  inquirer.prompt(managerQuestions).then((response) => {
-    console.log(response);
+  //"Return" saves Promise (responses) after following function is run
+  return inquirer.prompt(managerQuestions).then((response) => {
+    const manager = new Manager(
+      response.name,
+      response.id,
+      response.email,
+      response.office
+    );
+    team.push(manager);
   });
 }
-*/
 
-//Insert responses for Manager entries
-
-const htmlString = fs.readFileSync("index.html", "utf8");
-const manager = new Manager("Ted", 23, "email@email", 2);
+///GET RID OF THESE
 const engineer = new Engineer("Lauren", 33, "email@email", "L-Buchholz");
 const intern = new Intern("Felipe", 20, "email@email", "University of Nowhere");
 
-//Iterate for more than one instance of manager, engineer, and/or intern entries
+//Function for generating HTML
 
-const team = [manager, engineer, intern];
-
-const output = team
-  .map((member) => {
-    return member.render();
-  })
-  .join("");
+function generateHtml() {
+  const htmlString = fs.readFileSync("index.html", "utf8");
+  const output = team
+    .map((member) => {
+      return member.render();
+    })
+    .join("");
+  const templateHtml = htmlString.replace(
+    "<!--THIS IS THE INSERTION POINT-->",
+    //Replace with the following:
+    output
+  );
+  fs.writeFileSync("../dist/index.html", templateHtml);
+}
 
 /* The above is an abbreviated way of saying this: 
 {
@@ -125,22 +137,4 @@ const output = team
   }
 */
 
-const templateHtml = htmlString.replace(
-  "<!--THIS IS THE INSERTION POINT-->",
-  //Replace with the following:
-  output
-);
-
-//Creates new HTML file in dist (output) folder using generated template
-fs.writeFileSync("../dist/index.html", templateHtml);
-
-/*
-FROM PREVIOUS HW
-inquirer.prompt(questions).then((response) => {
-  fs.writeFile("user_README.md", generateMarkdown(response), (err) => {
-    err
-      ? console.error(err)
-      : console.log("Responses saved to new README file!");
-  });
-});
-*/
+promptForManager().then(generateHtml);
